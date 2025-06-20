@@ -1,0 +1,1850 @@
+/* ========================================================================== */
+/*  FROSTED GLASS: header, hero-banner, footer                                 */
+/* ========================================================================== */
+header.main-header,
+.hero-banner,
+footer.main-footer {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+.main-header {
+  padding-top: 1rem;   /* pushes the entire frosted bar down off the page-edge */
+}
+/* ========================================================================== */
+/*  SITE-WIDE RIPPLE OVERLAY                                                   */
+/* ========================================================================== */
+.ripple-overlay {
+  position: fixed;
+  inset: 0;
+  background: url('../images/ripple-overlay.png') repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: rippleMove 15s linear infinite;
+  z-index: 0;
+}
+@keyframes rippleMove {
+  from { background-position: 0 0; }
+  to   { background-position: 100% 100%; }
+}
+
+.about-page {
+  padding: 2rem;
+  background: #fffdfd;
+  color: #222;
+}
+
+.band-intro {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f5f8;
+  border-left: 4px solid #d76a6a;
+}
+
+.band-intro h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.band-bios .member {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f1f0f3;
+  border-radius: 5px;
+}
+
+.band-bios h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.band-facts ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.band-facts li {
+  margin: 0.5rem 0;
+  background: #eee;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid #6a9ed7;
+}
+/* --- Zine-style Layout --- */
+.zine-layout {
+  padding: 2rem;
+  /* frosted-glass instead of solid white: */
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  /* keep your text color */
+  color: #222;
+}
+
+
+.zine-heading {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.torn-paper {
+  background: #fff0f4;
+  border: 2px dashed #d76a6a;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: -6px 6px 0 #d76a6a;
+  position: relative;
+}
+
+.torn-paper::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 5px,
+    #fff0f4 5px,
+    #fff0f4 10px
+  );
+}
+
+.zine-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.sticky-note {
+  width: 30%;
+  min-width: 220px;
+  padding: 1rem;
+  background: #fce4ec;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+  transform: rotate(-1deg);
+  font-size: 0.95rem;
+  font-family: 'Raleway', sans-serif;
+  border-radius: 4px;
+}
+
+.sticky-note h4 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.1rem;
+}
+
+.sticky-note.pink { background: #fce4ec; }
+.sticky-note.yellow { background: #fff9c4; }
+.sticky-note.blue { background: #d1ecf1; }
+
+.rotate-left { transform: rotate(-3deg); }
+.rotate-right { transform: rotate(3deg); }
+
+.zine-facts .fact-boxes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.fact-box {
+  background: #f0eef7;
+  border-left: 5px solid #6a9ed7;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+/* ========================================================================== */
+/* 1) RESET & BASE                                                             */
+/* ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #222;
+  background: url('../images/banner-pool.png') center/cover fixed no-repeat;
+  background-color: #d1f3ff;
+  line-height: 1.6;
+  padding-top: 20px;
+}
+
+/* ========================================================================== */
+/* 2) SITE-WIDE RIPPLE OVERLAY                                                  */
+/* ========================================================================== */
+.ripple-overlay {
+  position: fixed;
+  inset: 0;
+  background: url('../images/ripple-overlay.png') repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: rippleMove 30s linear infinite;
+  z-index: 0;
+}
+@keyframes rippleMove {
+  from { background-position: 0 0; }
+  to   { background-position: 100% 100%; }
+}
+
+/* ========================================================================== */
+/* 3) PAGE CONTENT WRAPPER                                                       */
+/* ========================================================================== */
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================================================== */
+/* 4) HEADER & NAVIGATION                                                        */
+/* ========================================================================== */
+header {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+}
+nav.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: relative;
+}
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+.nav-left { margin-right: auto; }
+.nav-right { margin-left: auto; }
+.nav-left a,
+.nav-right a {
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+.logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+  width: 160px;
+}
+.logo-overlay img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(255,105,180,0.35));
+}
+
+/* ========================================================================== */
+/* 5) MOBILE NAVIGATION                                                          */
+/* ========================================================================== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  .nav-left,
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    text-align: center;
+  }
+  .nav-container.open .nav-left,
+  .nav-container.open .nav-right {
+    display: flex;
+  }
+}
+@media (max-width: 768px) {
+  /* 1) When open, paint the whole wrapper */
+  .frosted-top.open {
+    background: rgba(255,255,255,0.95);
+    padding: 1rem 0;            /* vertical padding for the big pane */
+  }
+
+  /* 2) Lists become transparent, full-width, no extra margin */
+  .frosted-top.open .nav-left,
+  .frosted-top.open .nav-right {
+    background: none;
+    margin:    0;
+    width:   100%;
+    display: flex;              /* already flex-direction:column */
+  }
+
+  /* 3) Remove any gap you might’ve inherited */
+  .nav-right {
+    margin-top: 0;
+  }
+
+  /* (Optional) subtle separator between the two groups */
+  .nav-left {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+}
+
+/* ========================================================================== */
+/* 6) HERO BANNER                                                                */
+/* ========================================================================== */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1px);
+  z-index: 1;
+}
+.hero-banner .ripple-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-banner .btn {
+  display: inline-block;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-banner .btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(2px);
+  border-radius: 1rem;
+  text-align: center;
+}
+.hero-logo {
+  max-width: 55%;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(255,0,128,0.5));
+}
+.tagline {
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: #fceaff;
+}
+
+/* ========================================================================== */
+/* 7) BUTTONS & RIPPLE-WAVE                                                        */
+/* ========================================================================== */
+.btn {
+  display: inline-block;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  background: transparent;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #fff3f6;
+}
+@keyframes rippleText {
+  0%,100% { transform: none; }
+  15%      { transform: skewX(2deg) scaleY(1.05); }
+  30%      { transform: skewX(-2deg) scaleY(0.95); }
+}
+.ripple-wave:hover {
+  animation: rippleText 1.2s ease-in-out;
+}
+
+/* ========================================================================== */
+/* === YOUR EXISTING SECTION STYLES BELOW ===                                  */
+/* Copy everything from your old file—from “.about-page { … }” through footer. */
+/* ========================================================================== */
+
+
+
+/* --- Music Page --- */
+.music-page {
+  padding: 2rem;
+  background: #fdfbfb;
+  color: #222;
+}
+
+.album-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.album-intro h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  color: #d76a6a;
+  margin-bottom: 0.5rem;
+}
+
+.album-intro p {
+  font-style: italic;
+  color: #666;
+}
+
+.cassette-player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-direction: column;
+}
+
+.cassette-shell {
+  padding: 1rem;
+  background: #e9e7ef;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 4px 4px 0 #d76a6a;
+}
+
+.cassette-shell img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.cassette-shell audio {
+  width: 100%;
+  outline: none;
+  background: #fff;
+  border-radius: 5px;
+}
+
+
+ /* Tracklist Section Enhancements */
+.tracklist {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  backdrop-filter: blur(12px) brightness(110%);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.tracklist h3 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+
+}
+
+.tracklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tracklist li {
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tracklist li:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffeef5;
+  transform: scale(1.03);
+}
+
+.tracklist li i {
+  margin-right: 0.5rem;
+  color: #ff99cc;
+}
+
+
+.tracklist ol {
+  padding-left: 1.5rem;
+}
+
+.tracklist li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.cassette-shell {
+  position: relative;
+  background: #e9e7ef;
+  padding: 1rem;
+  max-width: 420px;
+  margin: 0px 5px;
+  box-shadow: 4px 4px 0 #d76a6a;
+  border-radius: 10px;
+}
+
+.cassette-frame {
+  position: relative;
+  width: 100%;
+}
+
+.cassette-body {
+  width: 100%;
+  display: block;
+  z-index: 1;
+  position: relative;
+}
+
+.cassette-progress {
+  width: 100%;
+  height: 6px;
+  background: #ccc;
+  margin: 1rem 0 0.5rem;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cassette-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cassette-controls button {
+  background: linear-gradient(145deg, #d76a6a, #b94f4f);
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background-blend-mode: multiply;
+  box-shadow: 0 0 10px rgba(215, 106, 106, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 1px;
+
+}
+
+.cassette-controls button:hover {
+  background: #a63636;
+  transform: scale(1.05);
+}
+
+.cassette-controls button:active {
+  transform: scale(0.97);
+}
+
+#volume-slider {
+  width: 100px;
+}
+
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #d76a6a, #6a9ed7);
+  width: 0%;
+  transition: width 0.2s ease-out;
+}
+
+
+.reel {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(#444 20%, #999 60%, #ccc 100%);
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  top: 40%;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.reel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  background:
+    radial-gradient(circle, transparent 8px, #000 9px),
+    repeating-conic-gradient(#fff 0deg 10deg, #000 10deg 20deg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+
+.left-reel {
+  left: 101px;
+  margin-top: 14px;
+}
+
+.right-reel {
+  right: 94px;
+  margin-top: 14px;
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Style audio */
+.cassette-shell audio {
+  width: 100%;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.playlist {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.playlist ul {
+  list-style: none;
+  padding: 0;
+}
+
+.playlist li {
+  cursor: pointer;
+  padding: 0.5rem;
+  font-family: 'Archivo Black', sans-serif;
+  color: #6a9ed7;
+  transition: background 0.2s ease;
+}
+
+.playlist li:hover {
+  background: #f8f5f8;
+}
+
+.playlist li.active {
+  background: #d76a6a;
+  color: white;
+  font-weight: bold;
+}
+
+/* Enable 3D flip */
+#cassette {
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+/* Trigger flip class */
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.tour-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 2rem;
+  border-bottom: 5px solid #f09;
+}
+
+.tour-dates {
+  padding: 1rem 2rem;
+}
+
+.tour-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px dashed #ccc;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fefefe;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.tour-date {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 1.8rem;
+  color: #c026d3;
+  margin-right: 1rem;
+}
+
+.tour-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.tour-info p {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.tickets {
+  background: #c026d3;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.tickets:hover {
+  background: #9d1aa9;
+}
+
+/* Vintage flyer feel */
+.vintage-paper {
+  background: url('../images/paper-texture.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 2rem;
+  font-family: 'Raleway', sans-serif;
+  color: #222;
+  border: 8px double #c026d3;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.flyer-header {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+  color: #9d1aa9;
+  text-shadow: 1px 1px #fff;
+}
+
+.flyer-subheader {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.tour-map img {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 0 auto 2rem auto;
+  border: 3px dashed #444;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+}
+
+.tour-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px dashed #c026d3;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.tour-date {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 1.6rem;
+  color: #c026d3;
+}
+
+.tour-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #111;
+}
+
+.tour-info p {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.tickets {
+  background: #c026d3;
+  color: white;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.tickets:hover {
+  background: #9d1aa9;
+}
+
+.merch-page {
+  padding: 2rem;
+  background: #f8f2ed;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+.merch-page h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.merch-item {
+  background: #fff;
+  border: 3px dashed #333;
+  padding: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.merch-item:hover {
+  transform: rotate(-1deg) scale(1.03);
+}
+
+.merch-item img {
+  width: 100%;
+  height: auto;
+  border: 2px solid #000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  margin-bottom: 0.5rem;
+}
+
+.gallery-page {
+  background: #faf7f1;
+  padding: 2rem;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+.gallery-page h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-description {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border: 2px solid #444;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: rotate(-1.5deg);
+  background: #fff;
+  padding: 0.25rem;
+}
+
+.gallery-grid img:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03) rotate(0deg);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.polaroid {
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  position: relative;
+  width: 250px;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid:nth-child(2n) {
+  transform: rotate(2deg);
+}
+
+.polaroid:hover {
+  transform: scale(1.05) rotate(0deg);
+  z-index: 1;
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+}
+
+.tape {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background: url('../images/tape.png') no-repeat center center/contain;
+  z-index: 2;
+}
+
+.tape.left {
+  top: -15px;
+  left: 10px;
+  transform: rotate(-15deg);
+}
+
+.tape.right {
+  top: -15px;
+  right: 10px;
+  transform: rotate(15deg);
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Lightbox base styling */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border: 5px solid white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border-radius: 10px;
+}
+
+.lightbox-overlay .close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* === MOBILE NAVIGATION === */
+/* 1. Hide the mobile toggle at desktop, show it at tablet/mobile */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+
+  .nav-left,
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    text-align: center;
+  }
+
+  .nav-container.open .nav-left,
+  .nav-container.open .nav-right {
+    display: flex;
+  }
+}
+/* desktop: hide hamburger */
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+}
+
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #ffe3ec;
+    display: none;
+    padding: 1rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  nav ul li {
+    text-align: center;
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: 0.75rem 0;
+  }
+
+
+.blog-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fffdf8;
+}
+
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-post {
+  background: #ffe3ec;
+  border-left: 5px solid #ff69b4;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.blog-post h2 {
+  margin-top: 0;
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.blog-post .date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post .preview {
+  font-size: 1rem;
+  color: #333;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #c71585;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+header, .tour-preview, footer {
+  background: rgba(255, 255, 255, 0.25); /* light and see-through */
+  backdrop-filter: blur(10px);           /* frosted glass effect */
+  -webkit-backdrop-filter: blur(10px);   /* for Safari support */
+  border-radius: 10px;
+  margin: 1rem;
+  padding: 1rem 2rem;
+  color: #111;
+  
+}
+
+.tour-preview {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.tour-preview h3 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.tour-preview .tour-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.tour-preview .tour-list li {
+  margin: 0.5rem 0;
+}
+
+.tour-preview .tour-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  display: inline-block;
+    margin: 0 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    background: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+  }
+
+.hero-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+.ripple-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  animation: rippleMove 15s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rippleMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  color: #3c2f4d
+}
+
+.glass-section {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  color: #3c2f4d; /* 👈 Updated font color */
+  max-width: 1000px;
+}
+
+.glass-section h2,
+.glass-section h3,
+.glass-section p,
+.glass-section li,
+.glass-section strong {
+  color: #3c2f4d; /* ensure all text inside .glass-section is overridden */
+}
+
+/* Ripple overlay */
+.ripple-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../images/ripple-overlay.png');
+  background-size: cover;
+  pointer-events: none;
+  animation: rippleMove 20s linear infinite;
+}
+
+
+/* Glassy sections */
+.glassy-box, .glass-header, .glass-footer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px) brightness(1.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 1100px;
+}
+
+/* Specific tweaks for gallery */
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.polaroid {
+  background: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.polaroid:hover {
+  transform: scale(1.03);
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.9rem;
+  color: #010101;
+  
+}
+
+.hero-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ripple-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: rippleMotion 6s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+@keyframes rippleMotion {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-1%, 1%) scale(1.01); }
+  50% { transform: translate(1%, -1%) scale(1.02); }
+  75% { transform: translate(-0.5%, 0.5%) scale(1.005); }
+}
+
+.glassy-section {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 1rem;
+  color: #111;
+}
+
+.merch-item {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.merch-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.merch-item img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.merch-item p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.merch-item strong {
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+}
+
+.checkout-page h2,
+.checkout-page h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.checkout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 1rem auto;
+  max-width: 400px;
+  text-align: left;
+}
+
+.checkout-total {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+}
+
+.checkout-button {
+  padding: 0.8rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkout-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.note {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+.blog-post {
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.blog-post h2 {
+  font-family: 'Archivo Black', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.comment-section {
+  margin-top: 2rem;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.comment-list li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Raleway', sans-serif;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.comment-button {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border: 1px solid white;
+  padding: 0.6rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.comment-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+
+/* ===== Split-nav with centered logo ===== */
+nav .nav-container {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0rem;
+  position: relative;
+}
+
+/* Left links push right, right links push left */
+.nav-left  { display: flex; gap: 6.5rem; margin-right: auto; }
+.nav-right { display: flex; gap: 3.5rem; margin-left:  auto; }
+
+/* Logo sits in between */
+.logo-wrapper {
+  flex: 0 0 auto;
+}
+
+/* ========================================================================== */
+/* RESET & BASE                                                               */
+/* ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #222;
+  background: url('../images/banner-pool.png') center/cover fixed no-repeat;
+  background-color: #d1f3ff; /* fallback */
+  line-height: 1.6;
+  padding-top: 20px;
+}
+
+/* ========================================================================== */
+/* RIPPLE OVERLAY (SITE-WIDE)                                                 */
+/* ========================================================================== */
+.ripple-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: url('../images/ripple-overlay.png') repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: rippleMove 30s linear infinite;
+  z-index: 0;
+}
+
+/* ========================================================================== */
+/* PAGE CONTENT WRAPPER                                                       */
+/* ========================================================================== */
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================================================== */
+/* HEADER & NAVIGATION                                                        */
+/* ========================================================================== */
+header {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.nav-left{
+  display: flex;
+  gap: 8rem;
+  list-style: none;
+}
+.nav-right {
+  display: flex;
+  gap: 4.5rem;
+  list-style: none;
+}
+
+.nav-left { margin-right: auto; }
+.nav-right { margin-left: auto; }
+
+.logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+  width: 160px;
+}
+
+.logo-overlay img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(255,105,180,0.35));
+}
+
+.nav-left a,
+.nav-right a {
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========================================================================== */
+/* HERO BANNER                                                                 */
+/* ========================================================================== */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.018);
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.hero-banner .ripple-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(2px);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.hero-logo {
+  max-width: 55%;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(255,0,128,0.5));
+}
+
+.tagline {
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: #fceaff;
+}
+
+/* ========================================================================== */
+/* BUTTONS & RIPPLE-WAVE                                                       */
+/* ========================================================================== */
+.btn {
+  display: inline-block;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  background: transparent;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #fff3f6;
+}
+
+@keyframes rippleText {
+  0%,100% { transform: none; }
+  15%      { transform: skewX(2deg) scaleY(1.05); }
+  30%      { transform: skewX(-2deg) scaleY(0.95); }
+}
+
+.ripple-wave:hover {
+  animation: rippleText 1.2s ease-in-out;
+}
+
+/* ========================================================================== */
+/* MOBILE NAVIGATION                                                           */
+/* ========================================================================== */
+.nav-left,
+.nav-right {
+  display: flex;          /* show in a row */
+  list-style: none;
+  /*gap: 2.5rem;  */          /* adjust spacing */
+}
+.menu-toggle {
+  display: none;          /* hide on desktop */
+}
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;       /* show ☰ on mobile */
+    margin-right: 12rem;
+  }
+
+  /* stack everything vertically on mobile */
+  .frosted-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* start with the nav‐lists hidden */
+  .nav-left,
+  .nav-right {
+    display: none;        /* mobile only */
+    flex-direction: column;
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+  }
+
+  /* when you toggle “.open” on .frosted-top, show them */
+  .frosted-top.open .nav-left,
+  .frosted-top.open .nav-right {
+    display: flex;
+  }
+
+  /* hide the logo when menu is open to save space */
+  .frosted-top.open .logo-overlay {
+    display: none;
+  }
+
+  /* full‐width tap targets */
+  .nav-left li,
+  .nav-right li {
+    width: 100%;
+  }
+  .nav-left a,
+  .nav-right a {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+  }
+}
+/* ========================================================================== */
+/* RIPPLE-MOVE KEYFRAMES                                                       */
+/* ========================================================================== */
+@keyframes rippleMove {
+  from { background-position: 0 0; }
+  to   { background-position: 100% 100%; }
+}
+
+.frosted-top {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;      /* vertical centering */
+  justify-content: space-between; /* keeps your left-links/logo/right-links layout */
+  padding: 1.5rem 2rem;   
+  gap: 2rem;  
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+.social-icons span {
+  margin: 0 0.5rem;
+}

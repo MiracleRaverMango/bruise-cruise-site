@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Aboard the Bruise Cruise</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ripple overlay sits behind everything -->
+  <div class="ripple-overlay"></div>
+
+  <!-- all your visible content -->
+  <div class="page-content">
+
+    <!-- *** NAVIGATION HEADER *** -->
+<header class="main-header">
+  <div class="frosted-top">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <div class="logo-overlay">
+      <img src="images/brucru-logo2.png" alt="Bruise Cruise Logo">
+    </div>
+
+    <ul class="nav-left">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+
+    <ul class="nav-right">
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="merch.html">Merch</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</header>
+
+
+    <!-- Hero Section -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <img
+          src="images/brucru-logo1.png"
+          alt="Bruise Cruise Logo"
+          class="hero-logo"
+        />
+        <p class="tagline">
+          “I cried on the dancefloor and still looked flawless.”
+        </p>
+        <a href="tour.html" class="btn ripple-wave">Catch Us on Tour</a>
+        <a href="music.html" class="btn ripple-wave">Play Our Latest</a>
+      </div>
+    </section>
+
+    <!-- Tour Preview -->
+    <section class="tour-preview">
+      <h3>Upcoming Shows</h3>
+      <ul class="tour-list">
+        <li><strong>Slush Motel</strong> — Los Angeles, CA — Jul 18</li>
+        <li><strong>The Hollow Dive</strong> — Chicago, IL — Jul 24</li>
+        <li><strong>Lo-Fi Lagoon</strong> — Brooklyn, NY — Aug 2</li>
+      </ul>
+      <a href="tour.html" class="tour-btn">View All Tour Dates</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <p>© Bruise Cruise 2025. Sink in style.</p>
+      <div class="social-icons">
+        <span>[IG]</span> <span>[TikTok]</span> <span>[Bandcamp]</span>
+      </div>
+    </footer>
+
+  </div><!-- /.page-content -->
+
+  <!-- mobile nav toggle script -->
+  <script>
+    document.querySelector('.menu-toggle')
+      .addEventListener('click', () => {
+        document.querySelector('.frosted-top')
+                .classList.toggle('open');
+      });
+  </script>
+</script>
+</body>
+</html>

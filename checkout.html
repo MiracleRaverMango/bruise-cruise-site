@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Bruise Cruise</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Ripple Background (stays fixed, behind everything) -->
+  <div class="hero-background">
+    <img src="images/banner-pool.png" alt="Pool background" class="background-img" />
+    <div class="ripple-overlay"></div>
+  </div>  <!-- ← closed hero-background here -->
+
+  <!-- Everything scrolls inside this -->
+  <div class="page-content">
+
+    <header class="main-header">
+      <div class="frosted-top">
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+        <div class="logo-overlay">
+          <img src="images/brucru-logo2.png" alt="Bruise Cruise Logo">
+        </div>
+
+        <ul class="nav-left">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="music.html">Music</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+
+        <ul class="nav-right">
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="merch.html">Merch</a></li>
+          <li><a href="tour.html">Tour</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="checkout-page glassy-section">
+      <h2>Order Summary</h2>
+      <ul id="checkout-cart" class="checkout-list"></ul>
+      <p class="checkout-total">Total: <strong>$<span id="checkout-total">0</span></strong></p>
+
+      <h3>Payment Info <span class="note">(Demo Only)</span></h3>
+      <form class="checkout-form">
+        <label>Name on Card:
+          <input type="text" placeholder="e.g. Mx. Cruise" required />
+        </label>
+        <label>Card Number:
+          <input type="text" placeholder="1234 5678 9012 3456" required />
+        </label>
+        <label>Expiry Date:
+          <input type="text" placeholder="MM/YY" required />
+        </label>
+        <label>CVV:
+          <input type="text" placeholder="123" required />
+        </label>
+        <label>Email:
+          <input type="email" placeholder="you@example.com" required />
+        </label>
+        <label>Shipping Address:
+          <textarea placeholder="123 Sad Disco Blvd, Unit B" required></textarea>
+        </label>
+        <button type="submit" class="checkout-button">Complete Order</button>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Bruise Cruise. Sink in style.</p>
+      <div class="social-icons">
+        <span>[IG]</span> <span>[TikTok]</span> <span>[Bandcamp]</span>
+      </div>
+    </footer>
+
+  </div><!-- /.page-content -->
+
+  <script>
+    // populate and total up cart
+    const cart = JSON.parse(localStorage.getItem("bruiseCruiseCart")) || [];
+    const list = document.getElementById("checkout-cart");
+    const totalSpan = document.getElementById("checkout-total");
+    let total = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.name} – $${item.price.toFixed(2)}`;
+      list.appendChild(li);
+      total += item.price;
+    });
+    totalSpan.textContent = total.toFixed(2);
+
+    // fake-submit handler
+    document.querySelector("form").addEventListener("submit", e => {
+      e.preventDefault();
+      alert("Thanks for your (pretend) purchase!");
+      localStorage.removeItem("bruiseCruiseCart");
+      window.location.href = "index.html";
+    });
+
+    // mobile menu toggle
+    document.querySelector('.menu-toggle')
+      .addEventListener('click', () =>
+        document.querySelector('.frosted-top').classList.toggle('open')
+      );
+  </script>
+
+</body>
+</html>

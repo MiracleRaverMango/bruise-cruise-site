@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merch — Bruise Cruise</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/merch.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+
+ 
+  <div class="hero-background">
+    <img src="images/banner-pool.png" alt="Pool background" class="background-img" />
+    <div class="ripple-overlay"></div>
+  </div>
+
+ 
+  <div class="page-content">
+
+    
+   <header class="main-header">
+  <div class="frosted-top">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <div class="logo-overlay">
+      <img src="images/brucru-logo2.png" alt="Bruise Cruise Logo">
+    </div>
+
+    <ul class="nav-left">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+
+    <ul class="nav-right">
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="merch.html">Merch</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</header>
+
+    
+    <main class="merch-page glassy-section">
+      <h2>Shop the Sorrow, Wear the Shine</h2>
+
+      <section class="merch-grid">
+        <div class="merch-item">
+          <img src="images/brucru-logo2.png" alt="Bruise Cruise Tee">
+          <p><strong>Bruise Cruise Classic Tee</strong></p>
+          <p>$25</p>
+          <button class="add-to-cart" data-name="Bruise Cruise Tee" data-price="25">Add to Cart</button>
+        </div>
+        <div class="merch-item">
+          <img src="images/brucru-merch1.png" alt="Tour Poster">
+          <p><strong>‘Kiss & Sink’ Tour Poster</strong></p>
+          <p>$15</p>
+          <button class="add-to-cart" data-name="Tour Poster" data-price="15">Add to Cart</button>
+        </div>
+        <div class="merch-item">
+          <img src="images/brucru-merch2.png" alt="Sun Hat">
+          <p><strong>Sad Disco Sun Hat</strong></p>
+          <p>$20</p>
+          <button class="add-to-cart" data-name="Sun Hat" data-price="20">Add to Cart</button>
+        </div>
+        <div class="merch-item">
+          <img src="images/brucru-merch3.png" alt="Sticker Pack">
+          <p><strong>Vinyl Sticker Pack</strong></p>
+          <p>$10</p>
+          <button class="add-to-cart" data-name="Sticker Pack" data-price="10">Add to Cart</button>
+        </div>
+      </section>
+
+      <section class="cart-summary glassy-section">
+        <h3>Your Cart</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0</span></p>
+        <button id="checkout-btn">Checkout</button>
+        <button id="clear-cart">Clear Cart</button>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <p>© Bruise Cruise 2025. Sink in style.</p>
+    </footer>
+
+  </div><!-- /.page-content -->
+
+  <!-- toggle script (identical to index) -->
+  <script>
+    document.querySelector('.menu-toggle')
+      .addEventListener('click', () => {
+        document.querySelector('.frosted-top')
+                .classList.toggle('open');
+      });
+
+    // --- cart logic (unchanged) ---
+    const cartItems = [];
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    document.querySelectorAll(".add-to-cart").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const item = e.currentTarget.closest(".merch-item");
+        const name = item.querySelector("strong").innerText;
+        const price = parseFloat(item.querySelector("p:last-of-type").innerText.replace("$",""));
+        cartItems.push({name, price});
+        updateCart();
+      });
+    });
+    function updateCart(){
+      cartList.innerHTML = "";
+      let total = 0;
+      cartItems.forEach(i=>{
+        const li = document.createElement("li");
+        li.textContent = `${i.name} - $${i.price}`;
+        cartList.appendChild(li);
+        total += i.price;
+      });
+      cartTotal.textContent = total.toFixed(2);
+    }
+    document.getElementById("clear-cart").addEventListener("click", ()=>{
+      cartItems.length = 0; updateCart();
+    });
+    document.getElementById("checkout-btn").addEventListener("click", ()=>{
+      localStorage.setItem("bruiseCruiseCart", JSON.stringify(cartItems));
+      window.location.href = "checkout.html";
+    });
+  </script>
+</body>
+</html>

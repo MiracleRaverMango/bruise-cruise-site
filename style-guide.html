@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bruise Cruise Style Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pool-blue: #70d6ff;
+      --floatie-pink: #f69ec4;
+      --eyeliner-black: #111111;
+      --bruise-purple: #8a4f9e;
+      --sunburn-red: #d76a6a;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: #fffdf8;
+      padding: 2rem;
+      color: var(--eyeliner-black);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Archivo Black', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .swatch {
+      flex: 1;
+      height: 80px;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .swatch.pool-blue { background: var(--pool-blue); }
+    .swatch.floatie-pink { background: var(--floatie-pink); }
+    .swatch.eyeliner-black { background: var(--eyeliner-black); }
+    .swatch.bruise-purple { background: var(--bruise-purple); }
+    .swatch.sunburn-red { background: var(--sunburn-red); }
+
+    .button-preview button {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(to right, var(--sunburn-red), var(--bruise-purple));
+      color: white;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button-preview button::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .button-preview button:hover::after {
+      transform: scaleX(1);
+    }
+
+    .typography-blocks {
+      margin: 2rem 0;
+    }
+
+    .typography-blocks h2 {
+      color: var(--bruise-purple);
+    }
+
+    .lyric {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .polaroid-demo {
+      width: 250px;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transform: rotate(-2deg);
+      position: relative;
+      text-align: center;
+      margin: 2rem auto;
+    }
+
+    .polaroid-demo img {
+      width: 100%;
+      border-bottom: 2px solid #eee;
+    }
+
+    .caption {
+      margin-top: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .marina-quotes {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      text-align: center;
+      padding: 1rem;
+      background: #fce4ec;
+      border-left: 5px solid var(--sunburn-red);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Bruise Cruise Mini Style Guide</h1>
+
+  <h2>🎨 Color Palette</h2>
+  <div class="color-swatches">
+    <div class="swatch pool-blue">Pool Blue</div>
+    <div class="swatch floatie-pink">Floatie Pink</div>
+    <div class="swatch eyeliner-black">Eyeliner Black</div>
+    <div class="swatch bruise-purple">Bruise Purple</div>
+    <div class="swatch sunburn-red">Sunburn Red</div>
+  </div>
+
+  <h2>📝 Typography</h2>
+  <div class="typography-blocks">
+    <h1>Main Header (Archivo Black)</h1>
+    <p>Body text (Raleway): This is an example of your paragraph style. It’s lightweight and clean.</p>
+    <p class="lyric">"And I cried so hard, the pool overflowed."</p>
+  </div>
+
+  <h2>🖋️ Melodrama Moments</h2>
+  <div class="marina-quotes">
+    <p>"I was a heartbreaker, dream maker, love taker... pool floater."</p>
+    <p>"The deep end isn't deep enough when you're drowning in your own reflection."</p>
+    <p>"Pop culture told me I could heal in sequins and synths. It lied."</p>
+    <p>"Some girls tan. I prefer to spiral."</p>
+  </div>
+
+  <h2>🎛️ Buttons</h2>
+  <div class="button-preview">
+    <button>Buy Tickets</button>
+    <button>Listen Now</button>
+  </div>
+
+  <h2>📸 Polaroid Mockup</h2>
+  <div class="polaroid-demo">
+    <img src="images/cassette.jpg" alt="Sample">
+    <div class="caption">backstage mascara meltdown</div>
+  </div>
+
+</body>
+</html>

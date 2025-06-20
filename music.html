@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music — Bruise Cruise</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- background + ripple -->
+  <div class="hero-background">
+    <img src="images/banner-pool.png" alt="Dreamy poolside" class="background-img" />
+    <div class="ripple-overlay"></div>
+  </div>
+
+  <div class="page-content">
+    <!-- header/nav (same as index) -->
+<header class="main-header">
+  <div class="frosted-top">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <div class="logo-overlay">
+      <img src="images/brucru-logo2.png" alt="Bruise Cruise Logo">
+    </div>
+
+    <ul class="nav-left">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+
+    <ul class="nav-right">
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="merch.html">Merch</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</header>
+
+
+    <!-- your main music content -->
+    <main class="glass-section">
+      <section class="album-intro">
+        <h2><em>Kiss &amp; Sink</em></h2>
+        <p>The heartbreak EP that sounds like crying in the motel bathroom but in stereo.</p>
+      </section>
+
+      <section class="cassette-player">
+        <div class="cassette-shell">
+          <div class="cassette-frame" id="cassette">
+            <img src="images/cassette.png" alt="Cassette body" class="cassette-body" />
+            <div class="reel left-reel"></div>
+            <div class="reel right-reel"></div>
+          </div>
+          <audio id="audio-player">
+            <source src="audio/track1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+
+          <div class="cassette-progress">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+
+          <div class="cassette-controls">
+            <button id="rewind-btn"><i class="fas fa-backward"></i></button>
+            <button id="play-btn"><i class="fas fa-play"></i></button>
+            <button id="forward-btn"><i class="fas fa-forward"></i></button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+          </div>
+        </div>
+
+        <section class="tracklist playlist glassy-box">
+          <h3>Tracklist</h3>
+          <ul>
+            <li data-src="audio/track1.mp3"><i class="fas fa-music"></i> Sunscreen Tears</li>
+            <li data-src="audio/track2.mp3"><i class="fas fa-music"></i> Echo in the Lobby</li>
+            <li data-src="audio/track3.mp3"><i class="fas fa-music"></i> Poolside Regrets</li>
+            <li data-src="audio/track4.mp3"><i class="fas fa-music"></i> Gone by Checkout</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="main-footer">
+      <p>© Bruise Cruise 2025. Sink in style.</p>
+    </footer>
+  </div><!-- /.page-content -->
+
+  <!-- scripts -->
+  <script>
+    // mobile nav toggle
+    document.querySelector('.menu-toggle')
+      .addEventListener('click', () => {
+        document.querySelector('.frosted-top').classList.toggle('open');
+      });
+
+    // audio + cassette logic (unchanged)
+    const audio = document.getElementById('audio-player');
+    const reels = document.querySelectorAll('.reel');
+    const cassette = document.getElementById('cassette');
+    const playBtn = document.getElementById("play-btn");
+    const rewindBtn = document.getElementById("rewind-btn");
+    const forwardBtn = document.getElementById("forward-btn");
+    const volumeSlider = document.getElementById("volume-slider");
+    const progressBar = document.getElementById("progress-bar");
+    const progressContainer = document.querySelector(".cassette-progress");
+    document.querySelectorAll(".playlist li").forEach(item => {
+      item.addEventListener("click", () => {
+        document.querySelectorAll(".playlist li").forEach(i=>i.classList.remove("active"));
+        item.classList.add("active");
+        cassette.classList.add("flipped");
+        setTimeout(()=>cassette.classList.remove("flipped"),700);
+        audio.src = item.dataset.src;
+        audio.currentTime = 0;
+        audio.play(); playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      });
+    });
+    playBtn.addEventListener("click", () => {
+      if(audio.paused){ audio.play(); playBtn.innerHTML='<i class="fas fa-pause"></i>'; }
+      else         { audio.pause(); playBtn.innerHTML='<i class="fas fa-play"></i>'; }
+    });
+    rewindBtn .addEventListener("click", ()=> audio.currentTime = Math.max(0, audio.currentTime-5));
+    forwardBtn.addEventListener("click", ()=> audio.currentTime = Math.min(audio.duration, audio.currentTime+5));
+    volumeSlider.addEventListener("input", ()=> audio.volume = volumeSlider.value);
+    audio.addEventListener("play",  ()=> reels.forEach(r=>r.classList.add('spin')));
+    audio.addEventListener("pause", ()=> reels.forEach(r=>r.classList.remove('spin')));
+    audio.addEventListener("ended", ()=> { playBtn.innerHTML='<i class="fas fa-play"></i>'; reels.forEach(r=>r.classList.remove('spin')); });
+    audio.addEventListener("timeupdate", ()=> {
+      progressBar.style.width = (audio.currentTime/audio.duration*100) + "%";
+    });
+    progressContainer.addEventListener("click", e=>{
+      const pct = (e.offsetX / progressContainer.clientWidth);
+      audio.currentTime = pct * audio.duration;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Bruise Cruise</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway&display=swap" 
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- fixed background + ripple overlay -->
+  <div class="hero-background">
+    <img src="images/banner-pool.png" alt="Pool background" class="background-img" />
+    <div class="ripple-overlay"></div>
+  </div>
+
+  <div class="page-content">
+    <!-- header/nav -->
+<header class="main-header">
+  <div class="frosted-top">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <div class="logo-overlay">
+      <img src="images/brucru-logo2.png" alt="Bruise Cruise Logo">
+    </div>
+
+    <ul class="nav-left">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+
+    <ul class="nav-right">
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="merch.html">Merch</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</header>
+
+    <!-- dynamic blog posts go here -->
+    <main class="blog-page glassy-section">
+      <div id="blog-posts" class="blog-list"></div>
+    </main>
+
+    <!-- footer -->
+    <footer class="main-footer">
+      <p>© Bruise Cruise 2025. Sink in style.</p>
+    </footer>
+  </div><!-- /.page-content -->
+
+  <!-- post template (for blog.js) -->
+  <template id="blog-template">
+    <article class="blog-post glassy-box" data-id="">
+      <h2 class="post-title"></h2>
+      <p class="post-date"></p>
+      <div class="post-content"></div>
+      <div class="comment-section">
+        <h3>Comments</h3>
+        <ul class="comment-list"></ul>
+        <form class="comment-form">
+          <input type="text" class="comment-name" placeholder="Name" required />
+          <textarea class="comment-text" placeholder="Comment" required></textarea>
+          <button type="submit" class="comment-button">Post Comment</button>
+        </form>
+      </div>
+    </article>
+  </template>
+
+  <!-- scripts -->
+  <script src="js/blog.js"></script>
+  <script>
+    // mobile nav toggle
+    document.querySelector('.menu-toggle')
+      .addEventListener('click', () => {
+        document.querySelector('.frosted-top').classList.toggle('open');
+      });
+  </script>
+</body>
+</html>
